@@ -1,0 +1,7 @@
+dnslib
+python-dotenv
+discord.py
+binascii
+urllib
+http
+socketserver
