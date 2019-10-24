@@ -84,10 +84,13 @@ class Handler(BaseHTTPRequestHandler):
 			return res
 
 		def wrapper(self):
-			self.send_header('Content-type','text/html')
 			self.server_version = "nginx"
 			self.sys_version = ""
 			
+			self.send_response(200)
+			self.send_header('Content-type','text/html')
+			self.end_headers()
+
 			req = {}
 			req['ip'] = str(self.client_address[0])
 
@@ -122,24 +125,18 @@ class Handler(BaseHTTPRequestHandler):
 
 	@before_req
 	def do_OPTIONS(self):
-		self.send_response(200)
-		self.end_headers()
+		pass
 
 	@before_req
 	def do_HEAD(self):
-		self.send_response(200)
-		self.end_headers()
+		pass
 
 	@before_req
 	def do_POST(self):
-		self.send_response(200)
-		self.end_headers()
 		self.wfile.write(b" ")
 
 	@before_req
 	def do_GET(self):
-		self.send_response(200)
-		self.end_headers()
 		self.wfile.write(b" ")
 
 	def log_message(self, format, *args):
